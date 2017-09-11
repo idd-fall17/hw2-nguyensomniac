@@ -8,14 +8,25 @@ import com.google.android.things.pio.Gpio;
  */
 
 public class Hw2TemplateApp extends SimplePicoPro {
+
+    private final Gpio INCREMENT_PIN = GPIO_128;
+    private final Gpio DECREMENT_PIN = GPIO_39;
+    private final Gpio ADVANCE_PIN = GPIO_10;
+    private PongView pongView;
+
     @Override
     public void setup() {
         //set two GPIOs to input
-        pinMode(GPIO_128,Gpio.DIRECTION_IN);
-        setEdgeTrigger(GPIO_128,Gpio.EDGE_BOTH);
+        pinMode(INCREMENT_PIN,Gpio.DIRECTION_IN);
+        setEdgeTrigger(INCREMENT_PIN,Gpio.EDGE_BOTH);
 
-        pinMode(GPIO_39,Gpio.DIRECTION_IN);
-        setEdgeTrigger(GPIO_39,Gpio.EDGE_BOTH);
+        pinMode(DECREMENT_PIN,Gpio.DIRECTION_IN);
+        setEdgeTrigger(DECREMENT_PIN,Gpio.EDGE_BOTH);
+
+        pinMode(ADVANCE_PIN,Gpio.DIRECTION_IN);
+        setEdgeTrigger(ADVANCE_PIN,Gpio.EDGE_BOTH);
+
+        pongView = (PongView) activity.findViewById(R.id.pongGame);
     }
 
     @Override
@@ -29,12 +40,19 @@ public class Hw2TemplateApp extends SimplePicoPro {
         println("digitalEdgeEvent"+pin+", "+value);
         // when 128 goes from LOW to HIGH
         // this is on button button release for pull-up resistors
-        if(pin==GPIO_128 && value==HIGH) {
-            printCharacterToScreen('a');
+        if(pin==INCREMENT_PIN && value==HIGH) {
+            pongView.reactivateGame();
+            pongView.movePaddleUp();
+
         }
         //when 39 goes from HIGH to HIGH
-        else if (pin==GPIO_39 && value==HIGH) {
-            printCharacterToScreen('b');
+        else if (pin==DECREMENT_PIN && value==HIGH) {
+            pongView.reactivateGame();
+            pongView.movePaddleDown();
+        }
+        else if (pin==ADVANCE_PIN && value==HIGH) {
+            pongView.reactivateGame();
+            pongView.advanceScore();
         }
     }
 }

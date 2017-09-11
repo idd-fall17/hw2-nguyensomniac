@@ -41,7 +41,7 @@ public abstract class SimplePicoPro extends SimpleBoard {
     static int A1 = 1;
     static int A2 = 2;
     static int A3 = 3;
-    private Activity activity;
+    Activity activity;
 
     public SimplePicoPro() {
         try {
@@ -125,53 +125,6 @@ public abstract class SimplePicoPro extends SimpleBoard {
 
     public void setActivity(Activity a) {
         activity = a;
-    }
-    void printCharacterToScreen(char c) {
-        if (activity == null) {
-            Log.e(TAG,"printChar: activity is null");
-            return;
-        }
-
-        EditText editText;
-        editText = (EditText) activity.findViewById(R.id.editText);
-
-        if(editText != null) {
-            editText.getText().append(c);
-        } else {
-            Log.e(TAG,"printChar: Could not find R.id.editText");
-        }
-    }
-
-    void printStringToScreen(String s) {
-        if (activity == null) {
-            Log.e(TAG,"printString: activity is null");
-            return;
-        }
-
-        EditText editText;
-        editText = (EditText) activity.findViewById(R.id.editText);
-
-        if(editText != null) {
-            editText.getText().append(s);
-        } else {
-            Log.e(TAG,"printString: Could not find R.id.editText");
-        }
-    }
-
-    void clearStringOnScreen() {
-        if (activity == null) {
-            Log.e(TAG,"clearString: activity is null");
-            return;
-        }
-
-        EditText editText;
-        editText = (EditText) activity.findViewById(R.id.editText);
-
-        if(editText != null) {
-            editText.setText("");
-        } else {
-            Log.e(TAG,"clearString: Could not find R.id.editText");
-        }
     }
 
     public void teardown() {
