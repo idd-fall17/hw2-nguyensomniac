@@ -1,44 +1,7 @@
-Android Things empty project template
-=====================================
+# Assignment 2: Pong text entry
 
-Use this empty project as a template for your Android Things project.
+I wanted to create something as user-unfriendly as possible without the interface being completely unusable, so I created a Pong text entry device. It works like a single-player game of Pong, but instead of keeping score, it builds a string of letters. There are three buttons: one to move the Pong paddle up, another to move the paddle down, and a third button that adds a space character to the end of the string. Every time the ball hits the paddle, the last character of the string changes, i.e. a space character becomes an ‘a’, an ‘a’ becomes a ‘b’, and so on. Although (in theory) feasible, it takes over 10 minutes to enter the words “hello world.” It’s like watching paint dry.
 
+Demo video: https://youtu.be/CWN5RtkdvbE
 
-Pre-requisites
---------------
-
-- Android Things compatible board
-- Android Studio 2.2+
-
-
-Build and install
-=================
-
-On Android Studio, click on the "Run" button.
-
-If you prefer to run on the command line, type
-
-```bash
-./gradlew installDebug
-adb shell am start com.example.androidthings.myproject/.MainActivity
-```
-
-License
--------
-
-Copyright 2016 The Android Open Source Project, Inc.
-
-Licensed to the Apache Software Foundation (ASF) under one or more contributor
-license agreements.  See the NOTICE file distributed with this work for
-additional information regarding copyright ownership.  The ASF licenses this
-file to you under the Apache License, Version 2.0 (the "License"); you may not
-use this file except in compliance with the License.  You may obtain a copy of
-the License at
-
-  http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
-WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the
-License for the specific language governing permissions and limitations under
-the License.
+To construct the physical controller, I placed three switches on a breadboard. Each switch has one end that connects to a GPIO port (GPIO_10, GPIO_39, and GPIO_128) and another end that connects to ground. When the button is pressed, the circuit connects to ground and the GPIO pin reads back a low value; when it is released, the GPIO pin reads a high value again. I placed the switches in an orientation such that I could hold the breadboard and control the Pong paddle with just my left thumb; because of this, the buttons further up are also closer to the left side of the board. I also taped a piece of paper detailing the control set to the breadboard.
